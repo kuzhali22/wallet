@@ -1,39 +1,23 @@
+import java.util.ArrayList;
+
 public class Wallet {
+    public ArrayList<Money> totalMoney = new  ArrayList<>();
 
-    private final double moneyAmount;
-
-    public Wallet(double moneyAmount) {
-        this.moneyAmount = moneyAmount;
+    public void putMoney(Money moneyAmount) {
+        totalMoney.add(moneyAmount);
     }
 
-    public static Wallet createRupee(double rupeeAmount) {
-
-        return new Wallet(rupeeAmount);
+    public Money totalWalletMoney(){
+        double newMoneyAmount = 0;
+        for (Money money : totalMoney){
+            newMoneyAmount += money.moneyAmount;
+        }
+        return new Money(newMoneyAmount);
     }
 
-    public static Wallet createDollar(double dollarAmount) {
+    public void takeMoney(Money money) {
+        totalMoney.remove(money);
 
-        double dollar = Currency.RUPEE.convertCurrency(dollarAmount);
-        return new Wallet(dollar);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Wallet money = (Wallet) o;
-        return Double.compare(money.moneyAmount, moneyAmount) == 0;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Money{" +
-                "moneyAmount=" + moneyAmount +
-                '}';
-    }
-    /*@Override
-    public int hashCode() {
-        return Objects.hash(moneyAmount);
-    }*/
 }
