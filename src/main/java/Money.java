@@ -1,13 +1,10 @@
 public class Money {
     protected final double moneyAmount;
-
-    public Money(double moneyAmount) {
-        this.moneyAmount = moneyAmount;
-    }
+    protected final Currency currencyType;
 
     public Money(double moneyAmount, Currency currencyType) {
         this.moneyAmount = moneyAmount;
-
+        this.currencyType = currencyType;
     }
 
     public static Money rupee(double moneyAmount) {
@@ -15,7 +12,7 @@ public class Money {
     }
 
     public static Money dollar(double moneyAmount) {
-        double dollar = Currency.RUPEE.convertCurrency(moneyAmount);
+        double dollar = Currency.RUPEE.convertDollarToRupee(moneyAmount);
         return new Money(dollar,Currency.Dollar);
     }
 
