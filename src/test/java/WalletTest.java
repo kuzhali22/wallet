@@ -15,7 +15,7 @@ public class WalletTest {
     }
 
     @Test
-    void putMoneyIntoWallet() {
+    void shouldPutMoneyIntoWallet() {
         Wallet wallet = new Wallet();
         Money oneDollar = Money.dollar(1);
         Money twoDollar = Money.dollar(2);
@@ -29,7 +29,7 @@ public class WalletTest {
     }
 
     @Test
-    void putMoreMoneyIntoWallet() {
+    void shouldPutMoreMoneyIntoWallet() {
         Wallet wallet = new Wallet();
         Money tenRupee = Money.rupee(10);
         Money fiveRupee = Money.rupee(5);
@@ -43,7 +43,7 @@ public class WalletTest {
     }
 
     @Test
-    void takeMoneyFromWallet() throws NotEnoughMoneyInWalletException {
+    void shouldTakeMoneyFromWallet() throws NotEnoughMoneyInWalletException {
         Wallet wallet = new Wallet();
         Money tenRupee = Money.rupee(10);
         Money anotherTenRupee = Money.rupee(10);
@@ -57,7 +57,7 @@ public class WalletTest {
     }
 
     @Test
-    void takeMoneyFromWalletWhenWalletDoesNotHaveEnoughMoney() {
+    void shouldNotTakeMoneyFromWalletWhenWalletDoesNotHaveEnoughMoney() {
         Wallet wallet = new Wallet();
         Money tenRupee = Money.rupee(10);
         Money twentyRupee = Money.rupee(20);
@@ -68,7 +68,7 @@ public class WalletTest {
     }
 
     @Test
-    void totalMoneyInWalletInRupeesEqualToHundredAndTwentyFourPointEightFive() {
+    void shouldEquateTotalMoneyInWalletInRupeesEqualToHundredAndTwentyFourPointEightFive() {
         Wallet wallet = new Wallet();
         Money fiftyRupee = Money.rupee(50);
         Money oneDollar = Money.dollar(1);
@@ -77,11 +77,11 @@ public class WalletTest {
         wallet.putMoney(fiftyRupee);
         wallet.putMoney(oneDollar);
 
-        assertEquals(wallet.totalWalletMoney(),hundredAndTwentyFourPointEightFive);
+        assertEquals(wallet.totalWalletMoneyInPreferredCurrency(CurrencyValue.RUPEE),hundredAndTwentyFourPointEightFive);
     }
 
     @Test
-    void totalMoneyInWalletInDollarEqualToFour() {
+    void shouldEquateTotalMoneyInWalletInDollarEqualToFour() {
         Wallet wallet = new Wallet();
         Money seventyFourPointEightFive = Money.rupee(74.85);
         Money oneDollar = Money.dollar(1);
@@ -92,7 +92,7 @@ public class WalletTest {
         wallet.putMoney(oneDollar);
         wallet.putMoney(hundredAndFortyNinePointSeven);
 
-        assertEquals(wallet.totalWalletMoneyInDollar(),fourDollar);
+        assertEquals(wallet.totalWalletMoneyInPreferredCurrency(CurrencyValue.DOLLAR),fourDollar);
     }
 
 }

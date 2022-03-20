@@ -1,10 +1,10 @@
-public enum Currency {
-    Dollar(1),
+public enum CurrencyValue {
+    DOLLAR(1),
     RUPEE(74.85);
 
-    private double currencyValue;
+    private final double currencyValue;
 
-    Currency(double currencyValue) {
+    CurrencyValue(double currencyValue) {
         this.currencyValue = currencyValue;
     }
 

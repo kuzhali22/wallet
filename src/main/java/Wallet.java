@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
 public class Wallet {
-    private ArrayList<Money> totalMoney = new  ArrayList<>();
+    private final ArrayList<Money> totalMoney = new  ArrayList<>();
 
     public void putMoney(Money moneyAmount) {
         totalMoney.add(moneyAmount);
     }
 
     public Money totalWalletMoney(){
-        double newMoneyAmount = 0;
+        double totalAmount = 0;
         for (Money money : totalMoney){
-            newMoneyAmount += money.moneyAmount;
+            totalAmount += money.moneyAmount;
         }
-        return new Money(newMoneyAmount,Currency.RUPEE);
+        return new Money(totalAmount, CurrencyValue.RUPEE);
     }
 
     public void takeMoney(Money money) throws NotEnoughMoneyInWalletException {
@@ -24,11 +24,14 @@ public class Wallet {
 
     }
 
-    public Money totalWalletMoneyInDollar() {
-        double totalMoneyAmount = 0;
-        for (Money money : totalMoney){
-            totalMoneyAmount += money.moneyAmount;
+    public Money totalWalletMoneyInPreferredCurrency(CurrencyValue currencyValue) {
+        Money money;
+        if(CurrencyValue.DOLLAR == currencyValue) {
+             money = new Money(totalWalletMoney().moneyAmount, currencyValue);
+        } else{
+             money = totalWalletMoney();
         }
-        return new Money(totalMoneyAmount,Currency.Dollar);
+
+        return money;
     }
 }
